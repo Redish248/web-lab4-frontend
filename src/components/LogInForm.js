@@ -36,7 +36,7 @@ class LogInForm extends Component {
     render() {
         return (
             <div className="main_div">
-                <form id="formLogIn" /*method="post" action="/registration/checkUser"*/ onSubmit={this.handleSubmit}>
+                <form id="formLogIn"  onSubmit={this.handleSubmit}>
                     <h1>Вход:</h1>
 
                     <h3>Имя пользователя:</h3>
@@ -47,7 +47,7 @@ class LogInForm extends Component {
                     <Password id="pswd" feedback={false}  value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
                     <br/><br/>
 
-                    <Button label="Войти" /*onClick="validate()" onSubmit="registration/checkUser"*//>
+                    <Button label="Войти" />
 
                 </form>
             </div>
@@ -56,34 +56,4 @@ class LogInForm extends Component {
 }
 
 
-/*function validate() {
-    var login = document.getElementById("login");
-    var pswd = document.getElementById("pswd");
-    var errorMes = "kek";
-    var success = true;
-    if (isNaN(login) || isNaN(pswd) || login.search(/^\s+$/) !== -1){
-        success = false;
-    }
-    var error = document.getElementById("error");
-    if (success){
-        return true;
-    } else {
-        error.innerHTML = errorMes;
-        return false;
-    }
-}
-
-function removeError() {
-    var error = document.getElementById("error");
-    error.innerHTML = "<br/>";
-}
-
-let form = document.getElementById("formLogIn");
-
-form.addEventListener('submit', function (event) {
-    removeError();
-    validate();
-});
-
-*/
-export default LogInForm;
+export default connect()(LogInForm);

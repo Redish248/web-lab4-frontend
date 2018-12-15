@@ -1,6 +1,6 @@
 .main_div {
     width: 800px;
-    display: inline-block;
+    display: table;
     padding: 20px;
     border-radius: 15px;
     background-color: rgba(238, 253, 247, 0.9);

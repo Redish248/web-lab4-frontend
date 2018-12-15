@@ -34,7 +34,7 @@ class RegForm extends Component {
     render() {
         return (
             <div className="main_div">
-            <form method="post" onSubmit={this.handleSubmit.bind(this)} /*action="/registration"*/>
+            <form method="post" onSubmit={this.handleSubmit.bind(this)} >
                 <h1>Регистрация:</h1>
 
                 <h3>Имя пользователя:</h3>
@@ -44,7 +44,7 @@ class RegForm extends Component {
                 <Password  value={this.state.password} onChange={this.handlePasswordChange.bind(this)}/>
                 <br/><br/>
 
-                <Button  label="Регистрация" /*onClick="/registration/addUser"*/ />
+                <Button  label="Регистрация"  />
             </form>
             </div>
         );
