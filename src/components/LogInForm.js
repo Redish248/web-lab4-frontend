@@ -8,6 +8,7 @@ import {InputText} from 'primereact/inputtext';
 import {withRouter} from 'react-router-dom'
 
 import "../styles/Forms.css";
+import {connect} from "react-redux";
 
 class LogInForm extends Component {
     constructor(props) {
@@ -85,4 +86,4 @@ form.addEventListener('submit', function (event) {
 });
 
 */
-export default withRouter(LogInForm);
+export default LogInForm;
