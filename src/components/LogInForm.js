@@ -9,12 +9,15 @@ import {withRouter} from 'react-router-dom'
 
 import "../styles/Forms.css";
 import {connect} from "react-redux";
+import {signIn, signOut} from "../actions/actions";
 
 class LogInForm extends Component {
     constructor(props) {
         super(props);
         this.state = {nick: '',
-            password: ''};
+            password: '',
+            isAuth: true
+        };
     }
 
     handleSubmit = (event) => {
@@ -31,23 +34,39 @@ class LogInForm extends Component {
         this.setState({password: event.target.value});
     }
 
+    logIn = () => {
 
+        axios({
+            method: 'post',
+            url: 'http://localhost:8080/login',
+            data: {
+                nick: this.state.nick,
+                password: this.state.password
+            },
+            withCredentials: true
+        }).then(
+            console.log("kek")
+        ).catch( err => {
+                console.log("no kek")
+            }
+        );
+    };
 
     render() {
         return (
             <div className="main_div">
-                <form id="formLogIn"  onSubmit={this.handleSubmit}>
+                <form id="formLogIn"  /*onSubmit={this.handleSubmit}*/>
                     <h1>Вход:</h1>
 
                     <h3>Имя пользователя:</h3>
-                    <InputText id="login" keyfilter={/[^\s]/} value={this.state.nick} onChange={this.handleNickChange.bind(this)}/>
+                    <InputText id="login" keyfilter={/[^\s]/} value={this.state.nick} onChange={this.handleNickChange}/>
 
 
                     <h3>Пароль:</h3>
-                    <Password id="pswd" feedback={false}  value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
+                    <Password id="pswd" feedback={false}  value={this.state.password} onChange={this.handlePasswordChange} />
                     <br/><br/>
 
-                    <Button label="Войти" />
+                    <Button label="Войти" onClick={this.logIn}/>
 
                 </form>
             </div>
@@ -56,4 +75,4 @@ class LogInForm extends Component {
 }
 
 
-export default connect()(LogInForm);
+export default connect(null, {signIn, signOut})(LogInForm);
