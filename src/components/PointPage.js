@@ -50,7 +50,7 @@ class InputElem extends Component {
                                         Координата X:
                                     </tr>
                                     <tr>
-                                        <Spinner id="X" min={-5} max={3} value={this.state.spinnerX} onChange={(e) => this.setState({spinnerX: e.value})}/>
+                                        <Spinner id="X" readonly min={-5} max={3} value={this.state.spinnerX} onChange={(e) => this.setState({spinnerX: e.value})}/>
                                     </tr>
                                     <tr>
                                         Координата Y: {this.state.sliderY}
@@ -62,7 +62,7 @@ class InputElem extends Component {
                                         Радиус R:
                                     </tr>
                                     <tr>
-                                        <Spinner id="R" min={-5} max={3} value={this.state.spinnerR} onChange={(e) => this.setState({spinnerR: e.value})}/>
+                                        <Spinner id="R" readonly min={1} max={3} value={this.state.spinnerR} onChange={(e) => this.setState({spinnerR: e.value})}/>
                                     </tr>
                                     <tr>
                                         <Button id="pointButton" label="Проверить" /*onClick="/checkPoint/save"*//>
