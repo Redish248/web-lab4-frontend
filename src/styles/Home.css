@@ -48,3 +48,8 @@
 #date td {
     padding: 8px;
 }
+
+.p-button {
+    width: 170px;
+    font-weight: bold;
+}

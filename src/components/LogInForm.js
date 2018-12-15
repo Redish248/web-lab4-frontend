@@ -6,27 +6,29 @@ import {Button} from 'primereact/button';
 import {Password} from 'primereact/password';
 import {InputText} from 'primereact/inputtext';
 import {withRouter} from 'react-router-dom'
-import * as axios from "axios";
+
 import "../styles/Forms.css";
 import {connect} from "react-redux";
 import {signIn, signOut} from "../actions/actions";
+import * as axios from "axios";
 
 class LogInForm extends Component {
     constructor(props) {
         super(props);
         this.state = {nick: '',
             password: '',
-            isAuth: true
+            isAuth: true,
+            checkMessage: ""
         };
     }
 
-    handleSubmit = (event) => {
+    /*handleSubmit = (event) => {
         event.preventDefault();
         alert(this.state.nick + " " + this.state.password);
         this.props.history.push('/main');
     };
 
-    /*handleNickChange(event) {
+    handleNickChange(event) {
         this.setState({nick: event.target.value});
     }
 
@@ -39,6 +41,11 @@ class LogInForm extends Component {
             [name]: event.target.value,
         });
     };
+
+    handlePrevPage = (event) => {
+    event.preventDefault();
+    this.props.history.push('/');
+};
 
 
     logIn = (evt) => {
@@ -54,7 +61,9 @@ class LogInForm extends Component {
         }).then(
             this.props.history.push('/main')
         ).catch(function (error) {
-            console.log(error);
+            if (error.response.status === 401) {
+                console.log("no user")
+            }
         });
     };
 
@@ -67,6 +76,8 @@ class LogInForm extends Component {
                     <h3>Имя пользователя:</h3>
                     <InputText id="login" keyfilter={/[^\s]/} value={this.state.nick} onChange={this.handleChange('nick')}/>
 
+                    <br/>
+                    <label>{this.state.checkMessage}</label>
 
                     <h3>Пароль:</h3>
                     <Password id="pswd" feedback={false}  value={this.state.password} onChange={this.handleChange('password')} />
@@ -75,9 +86,19 @@ class LogInForm extends Component {
                     <Button label="Войти" onClick={this.logIn}/>
 
                 </form>
+                <br/>
+                <Button label="Назад" onClick={this.handlePrevPage}/>
             </div>
         );
     }
+}
+
+function validate(nick, password) {
+   if ((nick === '') || (password === '')) {
+       return false;
+   } else {
+       return true;
+   }
 }
 
 

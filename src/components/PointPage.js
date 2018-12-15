@@ -21,7 +21,7 @@ class InputElem extends Component {
             spinnerR: 2
         };
     }
-    handleLogOut= (event) => {
+    handleLogOut = (event) => {
         event.preventDefault();
         this.props.history.push('/');
     };
@@ -35,7 +35,7 @@ class InputElem extends Component {
         return (
             <div className="main_div">
                 <Button label="Выйти" onClick={this.handleLogOut.bind(this)}/>
-                <table>
+                <table className="main_table_point">
                     <tr>
                         <td>
                             <CanvasP/>

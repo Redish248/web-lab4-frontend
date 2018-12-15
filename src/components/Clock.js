@@ -104,9 +104,9 @@ function createCalendar() {
 
 export default Clock;
 
-/*document.location.onload = function () {
+window.onload = function () {
     setTime();
     if (document.getElementById("tableCalendar") != null) {
         createCalendar();
     }
-};*/
+};

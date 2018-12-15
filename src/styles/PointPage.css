@@ -8,3 +8,7 @@
     border: 1px solid blue;
     filter: alpha(Opacity=70);
 }
+
+.main_table_point td{
+    padding: 20px;
+}

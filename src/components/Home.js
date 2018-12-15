@@ -35,7 +35,7 @@ export default class Home extends Component {
                                 </tr>
                                 <br/>
                                 <tr>
-                <Button label="Зарегистрироваться" onClick={this.handleSignUp.bind(this)}/>
+                <Button label="Регистрация" onClick={this.handleSignUp.bind(this)}/>
                                 </tr>
                             </table>
                         </td>
