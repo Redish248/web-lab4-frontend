@@ -1,0 +1,32 @@
+.main_div {
+    width: 800px;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgba(238, 253, 247, 0.9);
+    color: #000000;
+    border: 1px solid blue;
+    filter: alpha(Opacity=70);
+}
+
+.table_header_2 td {
+    text-align: center;
+    font-size: 18pt;
+}
+
+.mainTable td {
+    padding: 35px;
+    width: 350px;
+}
+
+#inputXYR {
+    font-size: 18pt;
+}
+
+.formTableXYR {
+    border-spacing: 10px;
+}
+
+#chooseLabel {
+    font-weight: bold;
+}

@@ -1,0 +1,25 @@
+.header_1, .header_2{
+    width: 800px;
+    border-radius: 15px;
+    background-color: rgba(238, 253, 247, 0.9);
+    color: #000000;
+    border: 1px solid blue;
+    filter: alpha(Opacity=70);
+}
+
+.header_1 {
+    height: 55px;
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.header_2 {
+    height: 75px;
+    font-size: 25pt;
+
+}
+
+.table_header_2 td {
+    text-align: center;
+    font-size: 18pt;
+}
