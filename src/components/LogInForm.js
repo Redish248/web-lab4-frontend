@@ -6,7 +6,7 @@ import {Button} from 'primereact/button';
 import {Password} from 'primereact/password';
 import {InputText} from 'primereact/inputtext';
 import {withRouter} from 'react-router-dom'
-
+import * as axios from "axios";
 import "../styles/Forms.css";
 import {connect} from "react-redux";
 import {signIn, signOut} from "../actions/actions";
@@ -26,30 +26,36 @@ class LogInForm extends Component {
         this.props.history.push('/main');
     };
 
-    handleNickChange(event) {
+    /*handleNickChange(event) {
         this.setState({nick: event.target.value});
     }
 
     handlePasswordChange(event) {
         this.setState({password: event.target.value});
-    }
+    }*/
 
-    logIn = () => {
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
+    };
 
+
+    logIn = (evt) => {
+        evt.preventDefault();
+        let formData = new FormData();
+        formData.set('username', this.state.nick);
+        formData.set('password', this.state.password);
         axios({
             method: 'post',
             url: 'http://localhost:8080/login',
-            data: {
-                nick: this.state.nick,
-                password: this.state.password
-            },
+            data: formData,
             withCredentials: true
         }).then(
-            console.log("kek")
-        ).catch( err => {
-                console.log("no kek")
-            }
-        );
+            this.props.history.push('/main')
+        ).catch(function (error) {
+            console.log(error);
+        });
     };
 
     render() {
@@ -59,11 +65,11 @@ class LogInForm extends Component {
                     <h1>Вход:</h1>
 
                     <h3>Имя пользователя:</h3>
-                    <InputText id="login" keyfilter={/[^\s]/} value={this.state.nick} onChange={this.handleNickChange}/>
+                    <InputText id="login" keyfilter={/[^\s]/} value={this.state.nick} onChange={this.handleChange('nick')}/>
 
 
                     <h3>Пароль:</h3>
-                    <Password id="pswd" feedback={false}  value={this.state.password} onChange={this.handlePasswordChange} />
+                    <Password id="pswd" feedback={false}  value={this.state.password} onChange={this.handleChange('password')} />
                     <br/><br/>
 
                     <Button label="Войти" onClick={this.logIn}/>
