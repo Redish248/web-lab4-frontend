@@ -9,7 +9,7 @@ class Clock extends Component {
                 <table id = "startTable">
                     <tr>
                         <td>
-                            <iframe src="https://giphy.com/embed/5vrIMzUk6xHoI" width="250" height="250" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                            <iframe  src="https://giphy.com/embed/5vrIMzUk6xHoI" width="250" height="250" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
                             <p><a href="https://giphy.com/gifs/pusheen-vagrant-5vrIMzUk6xHoI"></a></p>
                         </td>
                     </tr>

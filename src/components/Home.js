@@ -22,14 +22,13 @@ export default class Home extends Component {
     render() {
         return (
             <div className="home">
-                <table>
+                <table id="home_table">
                     <tr>
-                        <td>
+                        <td  id="table_1">
                             <Clock/>
-
                         </td>
-                        <td>
-                            <table>
+                        <td  id="table_2">
+                            <table id="buttonTable">
                                 <tr>
                 <Button label="Войти" onClick={this.handleLogIn}/>
                                 </tr>
@@ -45,6 +44,3 @@ export default class Home extends Component {
         );
     }
 }
-
-/* "dev": "webpack --mode development",
-   "build": "webpack --mode production",*/

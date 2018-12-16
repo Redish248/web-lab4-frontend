@@ -22,21 +22,28 @@
     border-radius: 20px;
 }
 
-@media screen and (max-width: 732px) {
-    .home {
-        max-width: 600px;
-    }
-    table {
-        overflow-x: auto;
-        overflow-y: auto;
-        display: inline-block;
-    }
-    #resultPoint {
-        text-align: center;
+@media only all and (max-width: 732px) {
+    .main_div {
+        max-width: 375px;
     }
 
-    #pointTable, #resultPoint {
-        width: 90%;
+    .main_table_point tr, .formTableXYR{
+        display: inline-grid;
+    }
+    #canvas {
+        grid-column: 1/1;
+        grid-row: 1/2;
+    }
+    .formTableXYR {
+        grid-column: 1/1;
+        grid-row: 2/2;
+    }
 
+    .formTableXYR tr{
+      padding: 5px;
+    }
+
+    #pointTable, #resultPoint, .main_table_point {
+        width: 100%;
     }
 }

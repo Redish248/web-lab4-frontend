@@ -9,13 +9,13 @@
 
 .header_1 {
     height: 55px;
-    font-size: 35px;
+    font-size: 25px;
     margin-bottom: 15px;
 }
 
 .header_2 {
-    height: 75px;
-    font-size: 25pt;
+    height: 110px;
+    font-size: 15pt;
 
 }
 
@@ -24,13 +24,9 @@
     font-size: 18pt;
 }
 
-@media screen and (max-width: 732px) {
+@media only all and (max-width: 732px) {
     .header_1, .header_2 {
-        max-width: 600px;
+        max-width: 375px;
     }
-    table {
-        overflow-x: auto;
-        overflow-y: auto;
-        display: inline-block;
-    }
+
 }
