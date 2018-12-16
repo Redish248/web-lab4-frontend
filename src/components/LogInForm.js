@@ -5,12 +5,14 @@ import 'primeicons/primeicons.css';
 import {Button} from 'primereact/button';
 import {Password} from 'primereact/password';
 import {InputText} from 'primereact/inputtext';
-import {withRouter} from 'react-router-dom'
 
 import "../styles/Forms.css";
 import {connect} from "react-redux";
 import {signIn, signOut} from "../actions/actions";
 import * as axios from "axios";
+import  {store} from "../store/store";
+import {userReducer} from "../reducers/userReducer";
+import {SIGN_IN} from "../actions/actionTypes";
 
 class LogInForm extends Component {
     constructor(props) {
@@ -26,6 +28,7 @@ class LogInForm extends Component {
         this.setState({
             [name]: event.target.value,
         });
+
     };
 
     handlePrevPage = (event) => {
@@ -35,6 +38,7 @@ class LogInForm extends Component {
 
 
     logIn = (event) => {
+        //mapStateToProps(this.state.nick);
         event.preventDefault();
         let formData = new FormData();
         formData.set('username', this.state.nick);
@@ -44,11 +48,11 @@ class LogInForm extends Component {
             url: 'http://localhost:8080/login',
             data: formData,
             withCredentials: true
-        }).then(
-                this.props.history.push('/main')
+        }).then(response => (
+                this.props.history.push('/main'))
         ).catch(function (error) {
             if (error.response.status === 401) {
-                console.log("no user")
+                alert("no user")
             }
         });
     };
@@ -56,11 +60,11 @@ class LogInForm extends Component {
     render() {
         return (
             <div className="main_div">
-                <form id="formLogIn"  /*onSubmit={this.handleSubmit}*/>
+                <form id="formLogIn" >
                     <h1>Вход:</h1>
 
                     <h3>Имя пользователя:</h3>
-                    <InputText id="login" keyfilter={/[^\s]/} value={this.state.nick} onChange={this.handleChange('nick')}/>
+                    <InputText id="login" keyfilter={/[^\s]/} value={this.props.nick} onChange={this.handleChange('nick')}/>
 
                     <br/>
                     <label>{this.state.checkMessage}</label>
@@ -87,5 +91,12 @@ function validate(nick, password) {
    }
 }
 
+/*const mapStateToProps = (nick) => {
+    console.log(store);
+    return {
+        nick: nick
+    };
+};
+*/
 
-export default connect(null, {signIn, signOut})(LogInForm);
+export default connect(null, {signIn})(LogInForm);

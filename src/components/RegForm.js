@@ -41,10 +41,13 @@ class RegForm extends Component {
             url: 'http://localhost:8080/lab4/signup',
             data: formData,
             withCredentials: true
-        }).then(
-                this.props.history.push('/main')
+        }).then(response =>
+            (this.props.history.push('/main'))
+
         ).catch(function (error) {
-            console.log(error);
+            if ((error.response) && (error.response.status = 400)) {
+                alert('user exists');
+        }
         });
     };
 
