@@ -8,12 +8,13 @@ import "../styles/PointPage.css";
 import {Button} from 'primereact/button';
 import {Spinner} from 'primereact/spinner';
 import {Slider} from 'primereact/slider';
-import CanvasP from "./CanvasP";
 import {addPoint, signOut} from "../actions/actions";
 import {connect} from "react-redux";
 import * as axios from "axios/index";
 import history from "../history"
-import DataTablePoint from "./DataTablePoint";
+import {drawCanvas, drawPoint, drawAllPoints, clickCanvas} from './CanvasP';
+import {DataTable} from "primereact/components/datatable/DataTable";
+import {Column} from "primereact/components/column/Column";
 
 
 
@@ -25,11 +26,15 @@ class InputElem extends Component {
             nick: window.sessionStorage.getItem('nick'),
             sliderY: 1,
             spinnerX: 1,
-            spinnerR: 2
+            spinnerR: 2,
+            points: []
         };
     }
     handleLogOut = (event) => {
         event.preventDefault();
+        this.setState({
+            points: []
+        });
         window.sessionStorage.setItem('isAuthorised', false);
         window.sessionStorage.setItem('nick', '');
         this.props.signOut();
@@ -52,12 +57,16 @@ class InputElem extends Component {
             withCredentials: true
         }).then(() => {
             console.log("added");
-            this.getPoints()
+            this.getPoints();
+            //drawPoint(this.refs,this.props.x, this.props.y, this.props.r );
+            //drawAllPoints(this.refs, this.state.points, this.state.spinnerR);
             }
         ).catch(function (error) {
             console.log(error)
 
         });
+        this.getPoints();
+        drawAllPoints(this.refs, this.state.points, this.state.spinnerR);
     };
 
     getPoints = () => {
@@ -65,13 +74,34 @@ class InputElem extends Component {
             method: 'get',
             url: 'http://localhost:8080/lab4/getpoints',
             withCredentials: true
-        }).then(() => {
-                console.log("all points")
+        }).then((res) => {
+            this.setState({
+                points: res.data
+            });
+            drawAllPoints(this.refs, this.state.points, this.state.spinnerR);
             }
         ).catch(function (error) {
             console.log(error)
 
         });
+    };
+
+    componentDidMount() {
+        this.getPoints();
+        drawCanvas(this.refs,2);
+        drawAllPoints(this.refs, this.state.points, this.state.spinnerR);
+    }
+
+    _onMouseMove = (e) => {
+        this.setState({ spinnerX: e.nativeEvent.offsetX-150,
+            sliderY: e.nativeEvent.offsetY -150});
+    };
+
+    interactiveCanvas = (e) => {
+        let r = this.state.spinnerR;
+        let x = (((this.state.spinnerX - 300) * r) / 100);
+        let y = (((-this.state.sliderY + 150) * r) / 100 );
+        drawPoint(this.refs,x,y,r);
     };
 
     render() {
@@ -82,7 +112,7 @@ class InputElem extends Component {
                 <table className="main_table_point">
                     <tr>
                         <td>
-                            <CanvasP/>
+                            <canvas id="canvas" width="300px" height="300px" ref="canvas" onClick={this.interactiveCanvas} onMouseMove={this._onMouseMove} />
                         </td>
                         <td>
                             <form id = "pointForm" >
@@ -106,7 +136,8 @@ class InputElem extends Component {
                                         Радиус R:
                                     </tr>
                                     <tr>
-                                        <Spinner id="R" readonly min={1} max={3} value={this.state.spinnerR} onChange={(e) => this.setState({spinnerR: e.value})}/>
+                                        <Spinner id="R" readonly min={1} max={3} value={this.state.spinnerR} onChange={(e) => {this.setState({spinnerR: e.value});
+                                            drawAllPoints(this.refs, this.state.points, e.value);}}/>
                                     </tr>
                                     <tr>
                                         <Button id="pointButton" label="Проверить" onClick={this.savePoint}/>
@@ -117,13 +148,20 @@ class InputElem extends Component {
                     </tr>
                 </table>
                 <div id="resultPoint">
-                    <DataTablePoint/>
+                    <DataTable value={this.state.points}>
+                        <Column field="x" header="X" />
+                        <Column field="y" header="Y" />
+                        <Column field="r" header="R" />
+                        <Column field="isInArea" header="Hit" />
+                    </DataTable>
                 </div>
             </div>
         );
     }
 
 }
+
+
 function mapStateToProps ( state) {
     return {
         x: state.point.x,

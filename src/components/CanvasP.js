@@ -1,193 +1,128 @@
-import React, { Component } from 'react';
-import '../styles/Canvas.css';
+export function drawCanvas(refs, r) {
+    let canvas = refs.canvas;
+    let ctx = canvas.getContext("2d");
+    //очистка
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //треугольник
+    ctx.beginPath();
+    ctx.moveTo(150, 150);
+    ctx.lineTo(150, 85);
+    ctx.lineTo(20,150);
+    ctx.lineTo(150, 150);
+    ctx.closePath();
+    ctx.strokeStyle = "blue";
+    ctx.fillStyle = "blue";
+    ctx.fill();
+    ctx.stroke();
 
-import 'primereact/resources/themes/nova-light/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
+    //прямоугольник
+    ctx.beginPath();
+    ctx.rect(150, 150, 65, 130);
+    ctx.closePath();
+    ctx.strokeStyle = "blue";
+    ctx.fillStyle = "blue";
+    ctx.fill();
+    ctx.stroke();
 
-class CanvasP extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {context: null};
-    }
+    //сектор
+    ctx.beginPath();
+    ctx.moveTo(150, 150);
+    ctx.arc(150, 150, 130, Math.PI*3/2, 0, false);
+    ctx.closePath();
+    ctx.strokeStyle = "blue";
+    ctx.fillStyle = "blue";
+    ctx.fill();
+    ctx.stroke();
 
-    render() {
-        return (
-            <canvas id="canvas" width="300px" height="300px"
-                    /*ref={(e) => this.setState({context: e.getContext('2d')})} /*onClick={this.clickCanvas.bind(this)}*//>
+    //отрисовка осей
+    ctx.beginPath();
+    ctx.font = "12px Verdana";
+    ctx.moveTo(150, 0); ctx.lineTo(150, 300);
+    ctx.moveTo(150, 0); ctx.lineTo(145, 12);
+    ctx.moveTo(150, 0); ctx.lineTo(155, 12);
+    ctx.closePath();
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "black";
+    ctx.stroke();
 
-        );
-    }
-}
+    ctx.beginPath();
+    ctx.fillText("Y", 160, 10);
+    ctx.moveTo(0, 150);
+    ctx.lineTo(300, 150);
+    ctx.moveTo(300, 150);
+    ctx.lineTo(288, 145);
+    ctx.moveTo(300, 150);
+    ctx.lineTo(288, 155);
+    ctx.fillText("X", 290, 135);
+    ctx.closePath();
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "black";
+    ctx.stroke();
 
-    function clickCanvas() {
-        // removeError();
-        var r = document.getElementById("R").valueOf();
-        var canvas = document.getElementById('canvas');
-        var br = canvas.getBoundingClientRect();
-        var left = br.left;
-        var top = br.top;
-        var event = window.event;
-        var x = event.clientX - left;
-        var y = event.clientY - top;
-        alert(x + " " + " " + r);
-        var size = canvas.height;
-        if (r > 0) {
-            x = Math.round((x - size / 2) * r * 10 / 2 / 65) / 10;
-            y = Math.round((-y + size / 2) * r * 10 / 2 / 65) / 10;
-            drawCanvas(r);
-            document.getElementById("X").value = x;
-            document.getElementById("Y").value = y;
-            drawPoint(x, y, r);
-            document.getElementById('pointButton').click();
-            // drawAllPoints();
-        }
-    }
-
-
-function drawAllPoints() {
-    let r = document.getElementById('R').valueOf();
-    let x,y;
-    let counter=0;
-    let table = document.getElementById('resultPoint');
-    drawCanvas(r);
-    if (!(table===null)) {
-        table.querySelectorAll('td').forEach(function (e) {
-            switch (counter) {
-                case 0:
-                    x = e.innerHTML;
-                    break;
-                case 1:
-                    y = e.innerHTML;
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    drawPoint(x, y, r);
-                    counter -= 4;
-                    break;
-            }
-            counter++;
-        });
-    }
-}
-
-//------------canvas-------------
-
-function drawCanvas(r){
-    let canvas = document.getElementById('canvas'),
-        context = canvas.getContext("2d");
-//очистка
-    context.clearRect(0, 0, canvas.width, canvas.height);
-//треугольник
-    context.beginPath();
-    context.moveTo(150, 150);
-    context.lineTo(150, 85);
-    context.lineTo(20,150);
-    context.lineTo(150, 150);
-    context.closePath();
-    context.strokeStyle = "blue";
-    context.fillStyle = "blue";
-    context.fill();
-    context.stroke();
-
-//прямоугольник
-    context.beginPath();
-    context.rect(150, 150, 65, 130);
-    context.closePath();
-    context.strokeStyle = "blue";
-    context.fillStyle = "blue";
-    context.fill();
-    context.stroke();
-
-//сектор
-    context.beginPath();
-    context.moveTo(150, 150);
-    context.arc(150, 150, 130, Math.PI*3/2, 0, false);
-    context.closePath();
-    context.strokeStyle = "blue";
-    context.fillStyle = "blue";
-    context.fill();
-    context.stroke();
-
-//отрисовка осей
-    context.beginPath();
-    context.font = "12px Verdana";
-    context.moveTo(150, 0); context.lineTo(150, 300);
-    context.moveTo(150, 0); context.lineTo(145, 12);
-    context.moveTo(150, 0); context.lineTo(155, 12);
-    context.closePath();
-    context.strokeStyle = "black";
-    context.fillStyle = "black";
-    context.stroke();
-
-    context.beginPath();
-    context.fillText("Y", 160, 10);
-    context.moveTo(0, 150);
-    context.lineTo(300, 150);
-    context.moveTo(300, 150);
-    context.lineTo(288, 145);
-    context.moveTo(300, 150);
-    context.lineTo(288, 155);
-    context.fillText("X", 290, 135);
-    context.closePath();
-    context.strokeStyle = "black";
-    context.fillStyle = "black";
-    context.stroke();
-
-//деления X
-    context.beginPath();
-    context.moveTo(145, 20);
-    context.lineTo(155, 20);
-    context.moveTo(145, 85);
-    context.lineTo(155, 85);
-    context.moveTo(145, 215);
-    context.lineTo(155, 215);
-    context.moveTo(145, 280);
-    context.lineTo(155, 280);
+    //деления X
+    ctx.beginPath();
+    ctx.moveTo(145, 20);
+    ctx.lineTo(155, 20);
+    ctx.moveTo(145, 85);
+    ctx.lineTo(155, 85);
+    ctx.moveTo(145, 215);
+    ctx.lineTo(155, 215);
+    ctx.moveTo(145, 280);
+    ctx.lineTo(155, 280);
     if (r === 0){
-        context.fillText("R", 160, 25);
-        context.fillText("R/2", 160, 90);
-        context.fillText("-R/2", 160, 220);
-        context.fillText("-R", 160, 285);
+        ctx.fillText("R", 160, 25);
+        ctx.fillText("R/2", 160, 90);
+        ctx.fillText("-R/2", 160, 220);
+        ctx.fillText("-R", 160, 285);
     } else {
-        context.fillText(r, 160, 25);
-        context.fillText((r / 2), 160, 90);
-        context.fillText(-(r / 2), 160, 220);
-        context.fillText(-r, 160, 285);
+        ctx.fillText(r, 160, 25);
+        ctx.fillText((r / 2), 160, 90);
+        ctx.fillText(-(r / 2), 160, 220);
+        ctx.fillText(-r, 160, 285);
     }
 
-//деления Y
-    context.moveTo(20, 145);
-    context.lineTo(20, 155);
-    context.moveTo(85, 145);
-    context.lineTo(85, 155);
-    context.moveTo(215, 145);
-    context.lineTo(215, 155);
-    context.moveTo(280, 145);
-    context.lineTo(280, 155);
+    //деления Y
+    ctx.moveTo(20, 145);
+    ctx.lineTo(20, 155);
+    ctx.moveTo(85, 145);
+    ctx.lineTo(85, 155);
+    ctx.moveTo(215, 145);
+    ctx.lineTo(215, 155);
+    ctx.moveTo(280, 145);
+    ctx.lineTo(280, 155);
     if (r===0){
-        context.fillText("-R", 12, 140);
-        context.fillText("-R/2", 70, 140);
-        context.fillText("R/2", 205, 140);
-        context.fillText("R", 275, 140);
+        ctx.fillText("-R", 12, 140);
+        ctx.fillText("-R/2", 70, 140);
+        ctx.fillText("R/2", 205, 140);
+        ctx.fillText("R", 275, 140);
     } else {
-        context.fillText(-r, 12, 140);
-        context.fillText(-(r / 2), 70, 140);
-        context.fillText((r / 2), 205, 140);
-        context.fillText(r, 275, 140);
+        ctx.fillText(-r, 12, 140);
+        ctx.fillText(-(r / 2), 70, 140);
+        ctx.fillText((r / 2), 205, 140);
+        ctx.fillText(r, 275, 140);
     }
 
-    context.closePath();
-    context.strokeStyle = "black";
-    context.fillStyle = "black";
-    context.stroke();
+    ctx.closePath();
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = "black";
+    ctx.stroke();
 }
 
-function drawPoint(x,y,r){
+export function drawAllPoints(refs,points,r) {
+    drawCanvas(refs,r);
+    points.forEach(function(item) {
+        if (item.r === r ) {
+            drawPoint(refs, item.x, item.y, r);
+        }
+})
+}
+
+
+
+export function drawPoint(refs,x,y,r){
     let color;
-    let canvas = document.getElementById('canvas'),
-        ctx = canvas.getContext("2d");
+    let canvas = refs.canvas;
+    let ctx = canvas.getContext("2d");
     if (isArea(x,y,r)) {
         color = 'green';
     } else {
@@ -213,4 +148,24 @@ function isArea(x, y, r) {
 }
 
 
-export default CanvasP;
+    export function clickCanvas(refs, r) {
+        let canvas = refs.canvas;
+        let br = canvas.getBoundingClientRect();
+        let left = br.left;
+        let top = br.top;
+        let event = window.event;
+        let x = event.clientX - left;
+        let y = event.clientY - top;
+        let size = canvas.height;
+        if (r > 0) {
+            x = Math.round((x - size / 2) * r * 10 / 2 / 65) / 10;
+            y = Math.round((-y + size / 2) * r * 10 / 2 / 65) / 10;
+            drawCanvas(refs,r);
+            document.getElementById("X").value = x;
+            document.getElementById("Y").value = y;
+            drawPoint(refs,x, y, r);
+            document.getElementById('pointButton').click();
+        }
+    }
+
+

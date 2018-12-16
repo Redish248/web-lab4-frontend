@@ -16,3 +16,8 @@
 .hello {
    color: red;
 }
+
+#canvas {
+    background-color: #ffffff;
+    border-radius: 20px;
+}
