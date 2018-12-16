@@ -12,7 +12,7 @@ import {addPoint, signOut} from "../actions/actions";
 import {connect} from "react-redux";
 import * as axios from "axios/index";
 import history from "../history"
-import {drawCanvas, drawPoint, drawAllPoints, clickCanvas} from './CanvasP';
+import {drawCanvas, drawPoint, drawAllPoints} from './CanvasP';
 import {DataTable} from "primereact/components/datatable/DataTable";
 import {Column} from "primereact/components/column/Column";
 
@@ -58,8 +58,6 @@ class InputElem extends Component {
         }).then(() => {
             console.log("added");
             this.getPoints();
-            //drawPoint(this.refs,this.props.x, this.props.y, this.props.r );
-            //drawAllPoints(this.refs, this.state.points, this.state.spinnerR);
             }
         ).catch(function (error) {
             console.log(error)
@@ -93,21 +91,22 @@ class InputElem extends Component {
     }
 
     _onMouseMove = (e) => {
-        this.setState({ spinnerX: e.nativeEvent.offsetX-150,
-            sliderY: e.nativeEvent.offsetY -150});
+        this.setState({ spinnerX: Math.round((((e.nativeEvent.offsetX - 150) * this.state.spinnerR)* 10 / 2 / 65 ))/ 10,
+            sliderY:  Math.round(((-e.nativeEvent.offsetY + 150) * this.state.spinnerR)* 10 / 2 / 65) / 10});
     };
 
     interactiveCanvas = (e) => {
         let r = this.state.spinnerR;
-        let x = (((this.state.spinnerX - 300) * r) / 100);
-        let y = (((-this.state.sliderY + 150) * r) / 100 );
+        let x = this.state.spinnerX;
+        let y = this.state.sliderY;
         drawPoint(this.refs,x,y,r);
+        document.getElementById('pointButton').click();
     };
 
     render() {
         return (
             <div className="main_div">
-                <h2 id="saveNick" className="hello">Hello, {this.state.nick}!</h2>
+                <h2 id="saveNick" className="hello">Привет, {this.state.nick}!</h2>
                 <Button label="Выйти" onClick={this.handleLogOut.bind(this)}/>
                 <table className="main_table_point">
                     <tr>

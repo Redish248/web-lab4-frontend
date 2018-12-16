@@ -148,24 +148,6 @@ function isArea(x, y, r) {
 }
 
 
-    export function clickCanvas(refs, r) {
-        let canvas = refs.canvas;
-        let br = canvas.getBoundingClientRect();
-        let left = br.left;
-        let top = br.top;
-        let event = window.event;
-        let x = event.clientX - left;
-        let y = event.clientY - top;
-        let size = canvas.height;
-        if (r > 0) {
-            x = Math.round((x - size / 2) * r * 10 / 2 / 65) / 10;
-            y = Math.round((-y + size / 2) * r * 10 / 2 / 65) / 10;
-            drawCanvas(refs,r);
-            document.getElementById("X").value = x;
-            document.getElementById("Y").value = y;
-            drawPoint(refs,x, y, r);
-            document.getElementById('pointButton').click();
-        }
-    }
+
 
 
