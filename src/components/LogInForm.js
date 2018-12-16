@@ -31,6 +31,7 @@ class LogInForm extends Component {
     handlePrevPage = (event) => {
     event.preventDefault();
     this.props.history.push('/');
+        //document.location.reload();
 };
 
 
@@ -45,6 +46,8 @@ class LogInForm extends Component {
             data: formData,
             withCredentials: true
         }).then(response => {
+                window.sessionStorage.setItem('isAuthorised', true);
+                window.sessionStorage.setItem('nick', this.state.nick);
                 this.props.signIn(this.state.nick);
                 this.props.history.push('/main')}
         ).catch(function (error) {

@@ -5,12 +5,13 @@ import NotFound from "./components/NotFound";
 import LogInForm from "./components/LogInForm";
 import RegForm from "./components/RegForm";
 import PointPage from "./components/PointPage";
+import AuthRouter from "./AuthRouter";
 
 export default () =>
     <Switch>
         <Route path="/login" exact component={LogInForm} />
         <Route path="/signup" exact component={RegForm}/>
-        <Route path="/main" exact component={PointPage}/>
+        <Route path="/main" exact component={AuthRouter}/>
         <Route path="/" exact component={Home} />
         <Route component={NotFound} />
     </Switch>;

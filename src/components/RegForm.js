@@ -41,8 +41,9 @@ class RegForm extends Component {
             url: 'http://localhost:8080/lab4/signup',
             data: formData,
             withCredentials: true
-        }).then(response =>
-            {
+        }).then(response => {
+                window.sessionStorage.setItem('isAuthorised', true);
+                window.sessionStorage.setItem('nick', this.state.nick);
                 this.props.signUp(this.state.nick);
                 this.props.history.push('/main')}
 
