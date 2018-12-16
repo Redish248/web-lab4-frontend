@@ -43,13 +43,12 @@ class RegForm extends Component {
             withCredentials: true
         }).then(response => {
                 window.sessionStorage.setItem('isAuthorised', true);
-                window.sessionStorage.setItem('nick', this.state.nick);
                 this.props.signUp(this.state.nick);
                 this.props.history.push('/main')}
 
         ).catch(function (error) {
             if ((error.response) && (error.response.status = 400)) {
-                alert('user exists');
+                document.getElementById('error').innerText += "Такой пользователь уже есть!";
         }
         });
     };
@@ -57,6 +56,7 @@ class RegForm extends Component {
     render() {
         return (
             <div className="main_div">
+                <div id="error"/>
             <form>
                 <h1>Регистрация:</h1>
 
@@ -77,6 +77,7 @@ class RegForm extends Component {
 }
 
 function mapStateToProps(state)  {
+    window.sessionStorage.setItem('nick', state.user.nick);
     return {
         isAuthorised: state.user.isAuthorised,
         nick: state.user.nick

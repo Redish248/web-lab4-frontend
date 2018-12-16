@@ -16,8 +16,7 @@ class LogInForm extends Component {
     constructor(props) {
         super(props);
         this.state = {nick: '',
-            password: '',
-            checkMessage: ""
+            password: ''
         };
     }
 
@@ -33,6 +32,11 @@ class LogInForm extends Component {
     this.props.history.push('/');
         //document.location.reload();
 };
+    static changeState = (msg) => {
+      this.setState({
+          checkLogIn: msg
+      })
+    };
 
 
     logIn = (event) => {
@@ -46,35 +50,32 @@ class LogInForm extends Component {
             data: formData,
             withCredentials: true
         }).then(response => {
-                window.sessionStorage.setItem('isAuthorised', true);
-                window.sessionStorage.setItem('nick', this.state.nick);
+                sessionStorage.setItem('isAuthorised', true);
                 this.props.signIn(this.state.nick);
                 this.props.history.push('/main')}
         ).catch(function (error) {
             if (error.response.status === 401) {
-                alert("no user")
+                document.getElementById('error').innerText += "Пользователь не существует!";
             }
         });
     };
 
     render() {
-
         return (
             <div className="main_div">
+                <div id="error"/>
                 <form id="formLogIn" >
                     <h1>Вход:</h1>
-
                     <h3>Имя пользователя:</h3>
                     <InputText id="login" keyfilter={/[^\s]/} value={this.props.nick} onChange={this.handleChange('nick')}/>
 
                     <br/>
-                    <label>{this.state.checkMessage}</label>
 
                     <h3>Пароль:</h3>
                     <Password id="pswd" feedback={false}  value={this.state.password} onChange={this.handleChange('password')} />
                     <br/><br/>
 
-                    <Button label="Войти" onClick={this.logIn}/>
+                    <Button id="go" label="Войти" onClick={this.logIn}/>
 
                 </form>
                 <br/>
@@ -93,6 +94,7 @@ function validate(nick, password) {
 }
 
 function mapStateToProps(state)  {
+    window.sessionStorage.setItem('nick', state.user.nick);
     return {
         isAuthorised: state.user.isAuthorised,
         nick: state.user.nick

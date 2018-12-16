@@ -26,7 +26,7 @@ export default class Home extends Component {
                     <tr>
                         <td>
                             <Clock/>
-                             TODO: clock will be here!
+
                         </td>
                         <td>
                             <table>

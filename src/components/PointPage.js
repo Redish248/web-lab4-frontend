@@ -13,6 +13,7 @@ import {addPoint, signOut} from "../actions/actions";
 import {connect} from "react-redux";
 import * as axios from "axios/index";
 import history from "../history"
+import DataTablePoint from "./DataTablePoint";
 
 
 
@@ -51,7 +52,7 @@ class InputElem extends Component {
             withCredentials: true
         }).then(() => {
             console.log("added");
-            //this.getPoints()
+            this.getPoints()
             }
         ).catch(function (error) {
             console.log(error)
@@ -59,7 +60,7 @@ class InputElem extends Component {
         });
     };
 
-    /*getPoints = () => {
+    getPoints = () => {
         axios({
             method: 'get',
             url: 'http://localhost:8080/lab4/getpoints',
@@ -71,7 +72,7 @@ class InputElem extends Component {
             console.log(error)
 
         });
-    };*/
+    };
 
     render() {
         return (
@@ -116,7 +117,7 @@ class InputElem extends Component {
                     </tr>
                 </table>
                 <div id="resultPoint">
-
+                    <DataTablePoint/>
                 </div>
             </div>
         );
