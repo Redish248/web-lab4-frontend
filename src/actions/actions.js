@@ -1,26 +1,26 @@
 import {SIGN_IN, SIGN_OUT, SIGN_UP, ADD_POINT} from "./actionTypes"
 
-export const signUp = (nick, password) => ({
+export const signUp = (nick) => ({
     type: SIGN_UP,
-    nick,
-    password
+    nick: nick,
+    isAuthorised: true
 });
 
-export const signOut = (nick, password) => ({
+export const signOut = () => ({
     type: SIGN_OUT,
-    nick,
-    password
+    isAuthorised: false,
+    nick: '',
 });
 
-export const signIn = (nick, password) => ({
+export const signIn = (nick) => ({
     type: SIGN_IN,
-    nick,
-    password
+    nick: nick,
+    isAuthorised: true
 });
 
 export const addPoint = (x,y,r) => ({
     type: ADD_POINT,
-    x,
-    y,
-    r
+    x: x,
+    y: y,
+    r: r
 });

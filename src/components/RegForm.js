@@ -27,7 +27,7 @@ class RegForm extends Component {
         });
     };
 
-    handlePrevPage = (event) => {
+    handlePrevPage = () => {
         this.props.history.push('/');
     };
 
@@ -42,7 +42,9 @@ class RegForm extends Component {
             data: formData,
             withCredentials: true
         }).then(response =>
-            (this.props.history.push('/main'))
+            {
+                this.props.signUp(this.state.nick);
+                this.props.history.push('/main')}
 
         ).catch(function (error) {
             if ((error.response) && (error.response.status = 400)) {
@@ -73,5 +75,17 @@ class RegForm extends Component {
     }
 }
 
+function mapStateToProps(state)  {
+    return {
+        isAuthorised: state.user.isAuthorised,
+        nick: state.user.nick
+    }
+}
 
-export default connect(null, {signUp})(RegForm);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signUp : (nick) => dispatch(signUp(nick))
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(RegForm);

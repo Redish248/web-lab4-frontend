@@ -9,12 +9,10 @@ import {Button} from 'primereact/button';
 import {Spinner} from 'primereact/spinner';
 import {Slider} from 'primereact/slider';
 import CanvasP from "./CanvasP";
-import {addPoint} from "../actions/actions";
+import {addPoint, signOut} from "../actions/actions";
 import {connect} from "react-redux";
 import * as axios from "axios/index";
-import DataTablePoint from "./DataTablePoint";
-import {userReducer} from "../reducers/userReducer";
-import {rootReducer} from "../reducers/rootReducer";
+
 
 
 class InputElem extends Component {
@@ -22,6 +20,7 @@ class InputElem extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            nick: '',
             sliderY: 1,
             spinnerX: 1,
             spinnerR: 2
@@ -29,6 +28,7 @@ class InputElem extends Component {
     }
     handleLogOut = (event) => {
         event.preventDefault();
+        this.props.signOut();
         this.props.history.push('/');
     };
 
@@ -72,6 +72,7 @@ class InputElem extends Component {
         return (
             <div className="main_div">
                 <label>Hello, {this.props.nick}</label>
+                <br/>
                 <Button label="Выйти" onClick={this.handleLogOut.bind(this)}/>
                 <table className="main_table_point">
                     <tr>
@@ -118,11 +119,17 @@ class InputElem extends Component {
     }
 
 }
-const mapStateToProps = store => {
-    console.log(store);
+function mapStateToProps ( state) {
     return {
-        nick: store.nick,
+        nick: state.user.nick,
+        isAuthorised: state.user.isAuthorised,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signOut : () => dispatch(signOut())
     }
 };
 
-export default connect(mapStateToProps, {addPoint})(InputElem);
+export default connect(mapStateToProps, mapDispatchToProps)(InputElem);
