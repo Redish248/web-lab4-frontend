@@ -31,11 +31,11 @@ export default class Home extends Component {
                         <td>
                             <table>
                                 <tr>
-                <Button label="Войти" onClick={this.handleLogIn.bind(this)}/>
+                <Button label="Войти" onClick={this.handleLogIn}/>
                                 </tr>
                                 <br/>
                                 <tr>
-                <Button label="Регистрация" onClick={this.handleSignUp.bind(this)}/>
+                <Button label="Регистрация" onClick={this.handleSignUp}/>
                                 </tr>
                             </table>
                         </td>
@@ -45,3 +45,6 @@ export default class Home extends Component {
         );
     }
 }
+
+/* "dev": "webpack --mode development",
+   "build": "webpack --mode production",*/

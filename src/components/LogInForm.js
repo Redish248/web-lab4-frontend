@@ -22,20 +22,6 @@ class LogInForm extends Component {
         };
     }
 
-    /*handleSubmit = (event) => {
-        event.preventDefault();
-        alert(this.state.nick + " " + this.state.password);
-        this.props.history.push('/main');
-    };
-
-    handleNickChange(event) {
-        this.setState({nick: event.target.value});
-    }
-
-    handlePasswordChange(event) {
-        this.setState({password: event.target.value});
-    }*/
-
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
@@ -48,8 +34,8 @@ class LogInForm extends Component {
 };
 
 
-    logIn = (evt) => {
-        evt.preventDefault();
+    logIn = (event) => {
+        event.preventDefault();
         let formData = new FormData();
         formData.set('username', this.state.nick);
         formData.set('password', this.state.password);
@@ -59,7 +45,7 @@ class LogInForm extends Component {
             data: formData,
             withCredentials: true
         }).then(
-            this.props.history.push('/main')
+                this.props.history.push('/main')
         ).catch(function (error) {
             if (error.response.status === 401) {
                 console.log("no user")

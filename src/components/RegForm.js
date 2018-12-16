@@ -21,19 +21,6 @@ class RegForm extends Component {
             password: ''};
     }
 
-    /*handleSubmit(event) {
-        event.preventDefault();
-        alert(this.state.nick + " " + this.state.password);
-        this.props.history.push('/main');
-    }*/
-
-    /*handleNickChange(event) {
-        this.setState({nick: event.target.value});
-    }
-
-    handlePasswordChange(event) {
-        this.setState({password: event.target.value});
-    }*/
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
@@ -41,22 +28,21 @@ class RegForm extends Component {
     };
 
     handlePrevPage = (event) => {
-        event.preventDefault();
         this.props.history.push('/');
     };
 
-    signUp = () => {
-        alert("kek")
+    signUp = (event) => {
+        event.preventDefault();
+        let formData = new FormData();
+        formData.set('username', this.state.nick);
+        formData.set('password', this.state.password);
         axios({
             method: 'post',
             url: 'http://localhost:8080/lab4/signup',
-            data: {
-                nick: this.state.nick,
-                password: this.state.password
-            },
+            data: formData,
             withCredentials: true
         }).then(
-            alert(this.state.nick)
+                this.props.history.push('/main')
         ).catch(function (error) {
             console.log(error);
         });
@@ -65,7 +51,7 @@ class RegForm extends Component {
     render() {
         return (
             <div className="main_div">
-            <form method="post" /*onSubmit={this.handleSubmit.bind(this)}*/ >
+            <form>
                 <h1>Регистрация:</h1>
 
                 <h3>Имя пользователя:</h3>
