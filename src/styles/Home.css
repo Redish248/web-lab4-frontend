@@ -7,7 +7,11 @@
     color: #000000;
     border: 1px solid blue;
     filter: alpha(Opacity=70);
+    overflow-x: scroll;
+    overflow-y: scroll;
   }
+
+
 
 #clockAndCalendar {
     font-size: 25px;
@@ -52,4 +56,15 @@
 .p-button {
     width: 170px;
     font-weight: bold;
+}
+
+@media screen and (max-width: 732px) {
+    .home  {
+        max-width: 600px;
+    }
+    table {
+        overflow-x: auto;
+        overflow-y: auto;
+        display: inline-block;
+    }
 }

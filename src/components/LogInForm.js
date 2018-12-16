@@ -29,7 +29,6 @@ class LogInForm extends Component {
     handlePrevPage = (event) => {
     event.preventDefault();
     this.props.history.push('/');
-        //document.location.reload();
 };
     static changeState = (msg) => {
       this.setState({
@@ -85,13 +84,6 @@ class LogInForm extends Component {
     }
 }
 
-function validate(nick, password) {
-   if ((nick === '') || (password === '')) {
-       return false;
-   } else {
-       return true;
-   }
-}
 
 function mapStateToProps(state)  {
     window.sessionStorage.setItem('nick', state.user.nick);

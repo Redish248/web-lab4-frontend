@@ -21,3 +21,22 @@
     background-color: #ffffff;
     border-radius: 20px;
 }
+
+@media screen and (max-width: 732px) {
+    .home {
+        max-width: 600px;
+    }
+    table {
+        overflow-x: auto;
+        overflow-y: auto;
+        display: inline-block;
+    }
+    #resultPoint {
+        text-align: center;
+    }
+
+    #pointTable, #resultPoint {
+        width: 90%;
+
+    }
+}

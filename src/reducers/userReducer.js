@@ -1,4 +1,4 @@
-import {SIGN_IN, SIGN_OUT, SIGN_UP} from "../actions/actionTypes"
+import {SIGN_IN, SIGN_OUT} from "../actions/actionTypes"
 
 export function userReducer(state = {isAuthorised: false, nick: ""}, action) {
     switch (action.type) {

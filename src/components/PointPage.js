@@ -87,7 +87,7 @@ class InputElem extends Component {
     componentDidMount() {
         this.getPoints();
         drawCanvas(this.refs,2);
-        drawAllPoints(this.refs, this.state.points, this.state.spinnerR);
+        drawAllPoints(this.refs, this.state.points, this.props.r);
     }
 
     _onMouseMove = (e) => {
@@ -96,9 +96,9 @@ class InputElem extends Component {
     };
 
     interactiveCanvas = (e) => {
-        let r = this.state.spinnerR;
-        let x = this.state.spinnerX;
-        let y = this.state.sliderY;
+        let r = this.props.r;
+        let x = this.props.x;
+        let y = this.props.y;
         drawPoint(this.refs,x,y,r);
         document.getElementById('pointButton').click();
     };
@@ -147,12 +147,14 @@ class InputElem extends Component {
                     </tr>
                 </table>
                 <div id="resultPoint">
-                    <DataTable value={this.state.points}>
+                    <center>
+                    <DataTable id="pointTable" value={this.state.points}>
                         <Column field="x" header="X" />
                         <Column field="y" header="Y" />
                         <Column field="r" header="R" />
                         <Column field="isInArea" header="Hit" />
                     </DataTable>
+                    </center>
                 </div>
             </div>
         );

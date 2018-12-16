@@ -4,7 +4,6 @@ import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import LogInForm from "./components/LogInForm";
 import RegForm from "./components/RegForm";
-import PointPage from "./components/PointPage";
 import AuthRouter from "./AuthRouter";
 
 export default () =>
