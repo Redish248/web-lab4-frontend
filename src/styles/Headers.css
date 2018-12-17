@@ -9,13 +9,13 @@
 
 .header_1 {
     height: 55px;
-    font-size: 25px;
+    font-size: 35px;
     margin-bottom: 15px;
 }
 
 .header_2 {
-    height: 110px;
-    font-size: 15pt;
+    height: 75px;
+    font-size: 25pt;
 
 }
 
@@ -27,6 +27,16 @@
 @media only all and (max-width: 732px) {
     .header_1, .header_2 {
         max-width: 375px;
+    }
+    .header_1 {
+        height: 55px;
+        font-size: 25px;
+        margin-bottom: 15px;
+    }
+    .header_2 {
+        height: 110px;
+        font-size: 15pt;
+
     }
 
 }

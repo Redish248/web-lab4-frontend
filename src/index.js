@@ -7,12 +7,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 import history from './history'
-/*import {saveState} from "./localStorage";
-
-store.subscribe(() => {
-    saveState(store.getState());
-});
-*/
 
 ReactDOM.render(
     <Provider store={store}>

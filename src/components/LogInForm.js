@@ -10,6 +10,7 @@ import "../styles/Forms.css";
 import {connect} from "react-redux";
 import * as axios from "axios";
 import {signIn} from "../actions/actions";
+import history from "../history"
 
 class LogInForm extends Component {
     constructor(props) {
@@ -50,7 +51,8 @@ class LogInForm extends Component {
         }).then(response => {
                 sessionStorage.setItem('isAuthorised', true);
                 this.props.signIn(this.state.nick);
-                this.props.history.push('/main');
+                history.push('/main');
+                document.location.reload();
         }
         ).catch(function (error) {
             if (error.response.status === 401) {

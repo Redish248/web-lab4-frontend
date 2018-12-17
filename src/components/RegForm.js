@@ -12,6 +12,7 @@ import {InputText} from 'primereact/inputtext';
 import {connect} from "react-redux";
 import {signUp} from "../actions/actions";
 import * as axios from "axios/index";
+import history from "../history"
 
 
 class RegForm extends Component {
@@ -44,7 +45,9 @@ class RegForm extends Component {
         }).then(response => {
                 window.sessionStorage.setItem('isAuthorised', true);
                 this.props.signUp(this.state.nick);
-                this.props.history.push('/main')}
+                history.push('/main');
+            document.location.reload()
+        }
 
         ).catch(function (error) {
             if ((error.response) && (error.response.status = 400)) {
