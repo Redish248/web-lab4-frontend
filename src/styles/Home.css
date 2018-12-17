@@ -60,7 +60,6 @@
 @media only all and (max-width: 732px) {
     .home {
         max-width: 375px;
-
     }
     #home_table  tr{
         display: grid;
@@ -76,4 +75,10 @@
         padding-left: 25%;
     }
 
+}
+
+@media only all and (min-width: 732px) and (max-width: 1279px){
+    .home {
+        max-width: 700px;
+    }
 }
