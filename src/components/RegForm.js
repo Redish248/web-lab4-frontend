@@ -12,8 +12,6 @@ import {InputText} from 'primereact/inputtext';
 import {connect} from "react-redux";
 import {signUp} from "../actions/actions";
 import * as axios from "axios/index";
-import history from "../history"
-
 
 class RegForm extends Component {
     constructor(props) {
@@ -43,13 +41,13 @@ class RegForm extends Component {
             data: formData,
             withCredentials: true
         }).then(response => {
-                window.sessionStorage.setItem('isAuthorised', true);
-                this.props.signUp(this.state.nick);
-                history.push('/main');
-            document.location.reload()
-        }
-
-        ).catch(function (error) {
+            window.sessionStorage.setItem('isAuthorised', 'true');
+            this.props.signUp(this.state.nick);
+            this.props.history.push('/main');
+        }).catch(function (error) {
+            if (error === undefined || error.response === undefined) {
+                this.props.history.push('/ss');
+            }
             if ((error.response) && (error.response.status = 400)) {
                 document.getElementById('error').innerText += "Такой пользователь уже есть!";
         }

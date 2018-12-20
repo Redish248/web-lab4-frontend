@@ -10,7 +10,6 @@ import "../styles/Forms.css";
 import {connect} from "react-redux";
 import * as axios from "axios";
 import {signIn} from "../actions/actions";
-import history from "../history"
 
 class LogInForm extends Component {
     constructor(props) {
@@ -29,7 +28,7 @@ class LogInForm extends Component {
 
     handlePrevPage = (event) => {
     event.preventDefault();
-    this.props.history.push('/');
+        this.props.history.push('/');
 };
     static changeState = (msg) => {
       this.setState({
@@ -51,10 +50,13 @@ class LogInForm extends Component {
         }).then(response => {
                 sessionStorage.setItem('isAuthorised', true);
                 this.props.signIn(this.state.nick);
-                history.push('/main');
-                document.location.reload();
+                this.props.history.push('/main');
+
         }
         ).catch(function (error) {
+            if (error === undefined || error.response === undefined) {
+                this.props.history.push('/ss');
+            }
             if (error.response.status === 401) {
                 document.getElementById('error').innerText += "Пользователь не существует!";
             }

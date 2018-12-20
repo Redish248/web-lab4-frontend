@@ -6,11 +6,11 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { store } from './store/store'
-import history from './history'
+
 
 ReactDOM.render(
     <Provider store={store}>
-    <Router history={history}>
+    <Router >
         <App />
     </Router>
     </Provider>,
