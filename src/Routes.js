@@ -5,12 +5,16 @@ import NotFound from "./components/NotFound";
 import RegForm from "./components/RegForm";
 import LogInForm from "./components/LogInForm";
 import PointPage from "./components/PointPage";
+import {PrivateRoute} from "./PrivateRoute";
+import {ProtectedRoute} from "./ProtectedRouter";
+
 
 export default () =>
     <Switch>
         <Route path="/login" exact component={LogInForm} />
         <Route path="/signup" exact component={RegForm}/>
-        <Route path="/main" exact component={PointPage}/>
+        <Route path="/main" component={PointPage}/>
         <Route path="/" exact component={Home} />
         <Route component={NotFound} />
     </Switch>;
+

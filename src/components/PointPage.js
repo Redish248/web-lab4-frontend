@@ -29,15 +29,27 @@ class InputElem extends Component {
             points: []
         };
     }
+
+
     handleLogOut = (event) => {
         event.preventDefault();
         this.setState({
             points: []
         });
-        window.sessionStorage.setItem('isAuthorised', false);
-        window.sessionStorage.setItem('nick', '');
-        this.props.signOut();
-        this.props.history.push('/');
+
+        axios.post('http://localhost:8080/logout')
+            .then(res => {
+                console.log('logout')
+            }).catch((error)=> {
+            if (error.response.status === 404) {
+                console.log('logout')
+                window.sessionStorage.setItem('isAuthorised', 'false');
+                window.sessionStorage.setItem('nick', '');
+                this.props.signOut();
+                this.props.history.push('/');
+            }
+        });
+
     };
 
 

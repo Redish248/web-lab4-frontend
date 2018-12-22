@@ -24,3 +24,4 @@ yarn-error.log*
 /.idea/
 /web-lab4-frontend.iml
 /package-lock.json
+/src/Bank.js

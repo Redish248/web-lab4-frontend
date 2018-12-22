@@ -41,18 +41,29 @@ class RegForm extends Component {
             data: formData,
             withCredentials: true
         }).then(response => {
-            window.sessionStorage.setItem('isAuthorised', 'true');
             this.props.signUp(this.state.nick);
-            this.props.history.push('/main');
+            axios({
+                method: 'post',
+                url: 'http://localhost:8080/login',
+                data: formData,
+                withCredentials: true
+            }).then(response => {
+                    sessionStorage.setItem('isAuthorised', 'true');
+                    this.props.history.push('/main');
+                }
+            );
+            console.log('kek');
         }).catch(function (error) {
             if (error === undefined || error.response === undefined) {
                 this.props.history.push('/ss');
             }
             if ((error.response) && (error.response.status = 400)) {
-                document.getElementById('error').innerText += "Такой пользователь уже есть!";
+                console.log(error)
+                document.getElementById('error').innerText = "Такой пользователь уже есть!";
         }
         });
     };
+
 
     render() {
         return (
@@ -65,7 +76,7 @@ class RegForm extends Component {
                 <InputText keyfilter={/[^\s]/} value={this.state.nick} onChange={this.handleChange('nick')}/>
 
                 <h3>Пароль:</h3>
-                <Password  value={this.state.password} onChange={this.handleChange('password')}/>
+                <Password  feedback={false} value={this.state.password} onChange={this.handleChange('password')}/>
                 <br/><br/>
 
                 <Button  label="Зарегистрироваться" onClick={this.signUp} />
