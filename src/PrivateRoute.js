@@ -7,6 +7,6 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
         render={(props) => (
         sessionStorage.getItem('isAuthorised') === 'true'
             ? (<Component {...props} />)
-            : (<Redirect to='/login' />)
+            : (<Redirect to='/' />)
     )} />
 );

@@ -82,7 +82,7 @@ class RegForm extends Component {
                 <Button  label="Зарегистрироваться" onClick={this.signUp} />
             </form>
                 <br/>
-                <Button label="Назад" onClick={this.handlePrevPage}/>
+                <Button label="На главную" onClick={this.handlePrevPage}/>
             </div>
         );
     }

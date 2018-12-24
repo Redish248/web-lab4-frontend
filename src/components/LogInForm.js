@@ -30,12 +30,6 @@ class LogInForm extends Component {
     event.preventDefault();
         this.props.history.push('/');
 };
-    static changeState = (msg) => {
-      this.setState({
-          checkLogIn: msg
-      })
-    };
-
 
     logIn = (event) => {
         event.preventDefault();
@@ -48,7 +42,7 @@ class LogInForm extends Component {
             data: formData,
             withCredentials: true
         }).then(response => {
-                sessionStorage.setItem('isAuthorised', true);
+                sessionStorage.setItem('isAuthorised', 'true');
                 this.props.signIn(this.state.nick);
                 this.props.history.push('/main');
 
@@ -82,7 +76,7 @@ class LogInForm extends Component {
 
                 </form>
                 <br/>
-                <Button label="Назад" onClick={this.handlePrevPage}/>
+                <Button label="На главную" onClick={this.handlePrevPage}/>
             </div>
         );
     }

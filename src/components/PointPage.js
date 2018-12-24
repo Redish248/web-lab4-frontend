@@ -42,7 +42,6 @@ class InputElem extends Component {
                 console.log('logout')
             }).catch((error)=> {
             if (error.response.status === 404) {
-                console.log('logout')
                 window.sessionStorage.setItem('isAuthorised', 'false');
                 window.sessionStorage.setItem('nick', '');
                 this.props.signOut();
@@ -57,9 +56,9 @@ class InputElem extends Component {
         event.preventDefault();
         this.props.addPoint(this.state.spinnerX, this.state.sliderY, this.state.spinnerR);
         let formData = new FormData();
-        formData.set('x', this.state.spinnerX);
-        formData.set('y', this.state.sliderY);
-        formData.set('r', this.state.spinnerR);
+        formData.set('x', this.state.spinnerX.toString());
+        formData.set('y', this.state.sliderY.toString());
+        formData.set('r', this.state.spinnerR.toString());
         axios({
             method: 'post',
             url: 'http://localhost:8080/lab4/savepoint',
@@ -73,8 +72,6 @@ class InputElem extends Component {
             console.log(error)
 
         });
-        this.getPoints();
-        drawAllPoints(this.refs, this.state.points, this.state.spinnerR);
     };
 
     getPoints = () => {
@@ -83,6 +80,10 @@ class InputElem extends Component {
             url: 'http://localhost:8080/lab4/getpoints',
             withCredentials: true
         }).then((res) => {
+            res.data.forEach(function(i) {
+                i.x = Math.ceil(i.x*100)/100;
+                i.y = Math.ceil(i.y*100)/100;
+            });
             this.setState({
                 points: res.data
             });
